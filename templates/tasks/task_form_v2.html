@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>{{ task.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="id_title" value="{{ form.title.value }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" id="id_description">{{ form.description.value }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_status" class="form-label">Status</label>
+            {{ form.status|add_class:"form-select" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_priority" class="form-label">Priority</label>
+            {{ form.priority|add_class:"form-select" }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_end_time" class="form-label">End Time</label>
+            <input type="date" name="end_time" class="form-control" id="id_end_time" value="{{ form.end_time.value }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="id_creator" class="form-label">Creator</label>
+            {{ form.creator|add_class:"form-select" }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
+{% endblock %}

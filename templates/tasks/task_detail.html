@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>{{ task.title}}</h2>
+    <p> {{ task.description}}</p>
+    <p><strong>[STATUS]:</strong> <span class="badge text-bg-primary">{{ task.status }}</span></p>
+    <p><strong>[PRIORITY]:</strong> <span class="badge text-bg-secondary">{{ task.priority }}</span></p>
+
+</div>
+{% endblock %}
