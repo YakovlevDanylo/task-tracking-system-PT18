@@ -16,8 +16,6 @@ class TaskListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        creator = self.request.user
-        queryset = queryset.filter(creator=creator)
 
         status = self.request.GET.get("status", "")
         if status:
@@ -40,6 +38,7 @@ class TaskDetailView(DetailView):
     def get_context_data(self, **kwargs):
         content = super().get_context_data()
         content["comment_form"] = CommentForm()
+        return content
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
