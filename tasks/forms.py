@@ -6,6 +6,12 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ["title", "description", "status", "priority", "end_time"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(self, *args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({"class": "form-control"})
+
+
 class TaskFilterForm(forms.Form):
 
     STATUS_CHOICES = [
