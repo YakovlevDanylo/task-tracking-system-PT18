@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>This comment will be deleted. Are you sure??</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

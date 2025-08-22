@@ -7,5 +7,42 @@
     <p><strong>[STATUS]:</strong> <span class="badge text-bg-primary">{{ task.status }}</span></p>
     <p><strong>[PRIORITY]:</strong> <span class="badge text-bg-secondary">{{ task.priority }}</span></p>
 
+    <a href="{% url 'task-update' task.pk %}" class="btn btn-warning">Update</a>
+    <a href="{% url 'task-delete' task.pk %}" class="btn btn-danger">Delete</a>
+
+</div>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            Add comment
+        </div>
+        <div class="card-body">
+            <form method="post" class="mb-0">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type="submit" class="btn btn-success">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <h4>Comments</h4>
+    {% if task.comments.all %}
+        <ul class="list-group">
+            {% for comment in task.comments.all %}
+                <li class="list-group-item">
+                    <strong>{{ comment.author }}</strong> <small class="text-muted">{{ comment.created_at }}</small>
+                    <p class="mb-0">{{ comment.content }}</p>
+                    {% if user == comment.author %}
+                        <a href="{% url 'comment-edit' task.pk %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'comment-delete' task.pk %}" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
 </div>
 {% endblock %}
