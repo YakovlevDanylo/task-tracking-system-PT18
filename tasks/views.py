@@ -42,7 +42,7 @@ class TaskDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
-        task_comment_from = CommentForm(request.POST)
+        task_comment_from = CommentForm(request.POST, request.FILES)
 
         if task_comment_from.is_valid():
             comment = task_comment_from.save(commit=False)

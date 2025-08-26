@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 
 {% block content %}
+
 <div class="container mt-3">
     <h2>{{ task.title}}</h2>
     <p> {{ task.description}}</p>
@@ -35,6 +37,17 @@
             {% for comment in task.comments.all %}
                 <li class="list-group-item">
                     <strong>{{ comment.author }}</strong> <small class="text-muted">{{ comment.created_at }}</small>
+                    {% if comment.media %}
+                        {% if comment.media.url|endswith:".jpg" or comment.media.url|endswith:".jpeg" or comment.media.url|endswith:".png"%}
+                            <img src="{{ comment.media.url }}" style="max-width: 400px;">
+                        {% elif comment.media.url|endswith:".mp4"%}
+                            <video width="320" height="240" controls>
+                                <source src="{{ comment.media.url }}" type="video/mp4">
+                            </video>
+                        {% else %}
+                            <a href="{{ comment.media.url }}">upload</a>
+                        {% endif%}
+                    {% endif%}
                     <p class="mb-0">{{ comment.content }}</p>
                     {% if user == comment.author %}
                         <a href="{% url 'comment-edit' task.pk %}" class="btn btn-warning">Edit</a>
