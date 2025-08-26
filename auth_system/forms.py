@@ -5,7 +5,22 @@ from django import forms
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username"]
+        fields = ["username","password1", "password2"]
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Додаємо Bootstrap класи
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter username'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Enter password'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Confirm password'
+        })
 
 
 class CustomLoginForm(AuthenticationForm):
