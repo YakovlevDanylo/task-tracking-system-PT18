@@ -3,13 +3,14 @@ from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from auth_system.forms import CustomUserCreationForm
+from auth_system.forms import CustomUserCreationForm, CustomLoginForm
 
 
 # Create your views here.
 class CustomLoginView(LoginView):
     template_name = "auth_system/login.html"
     redirect_authenticated_user = True
+    form_class = CustomLoginForm
 
 class CustomLogoutView(LogoutView):
     next_page = "login"

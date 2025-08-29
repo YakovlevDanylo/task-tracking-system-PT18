@@ -4,9 +4,11 @@
 {% block content %}
 
 <h2>LOGIN</h2>
-<form method="post">
+<div class="container-sm" style="background-color: aquamarine; max-width: 500px;">
+    <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">LOGIN</button>
 </form>
+</div>
 {% endblock %}
